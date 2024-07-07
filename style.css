@@ -11,10 +11,46 @@ h4 {
   text-align: center;
 }
 
+h3 {
+  text-align: center;
+  font-weight: 100;
+  color: #16963d;
+  font-size: 30px;
+}
+
 nav {
   display: flex;
   justify-content: center;
 }
 a {
   padding-left: 20px;
+  font-size: 30px;
+  font-weight: bolder;
+  font-style: italic;
+  color: black;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+.cartimage {
+  height: 300px;
+  width: 300px;
+  border-radius: 150px;
+}
+h5 {
+  font-weight: 30px;
+  font-weight: 100;
+  color: #16963d;
+  font-size: 30px;
+  margin-top: 0;
+}
+button {
+  width: 300px;
+  height: 60px;
+  background-color: #16963d;
+  color: antiquewhite;
+  font-size: small;
+  font-weight: 200;
 }
