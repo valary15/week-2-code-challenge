@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const shoppingList = document.getElementById("shopping-list");
 
   const items = [
-    { id: 1, item: "Bread", image: "bread.png" },
-    { id: 2, item: "Meat", image: "Meat.png" },
-    { id: 3, item: "Milk", image: "milk.png" },
-    { id: 4, item: "Fruit", image: "fruit.png" },
+    { id: 1, item: "Bread", image: "bread.png", strike: false },
+    { id: 2, item: "Meat", image: "Meat.png", strike: false},
+    { id: 3, item: "Milk", image: "milk.png", strike: false },
+    { id: 4, item: "Fruit", image: "fruit.png", strike: false },
   ];
 
   function displayShoppingList() {
@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const title = document.createElement("h5");
       title.textContent = task.item;
+
+      if (task.strike === true) {
+        title.className = "strike";
+      }
 
       const addButton = document.createElement("button");
       addButton.textContent = "ADD";
@@ -43,4 +47,10 @@ buttons.forEach((button) => {
   button.addEventListener("add", () => {
     alert(`You clicked ${buttons}`);
   });
+});
+
+list.addEventListener("click", (e) => {
+  if (e.target.classList.contains("todo-item")) {
+    e.target.classList.toggle("strike");
+  }
 });

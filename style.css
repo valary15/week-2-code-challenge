@@ -50,6 +50,9 @@ h5 {
   font-size: 30px;
   margin-top: 0;
 }
+.strike {
+  text-decoration: line-through;
+}
 button {
   width: 300px;
   height: 60px;
