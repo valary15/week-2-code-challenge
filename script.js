@@ -32,3 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   displayShoppingList();
 });
+function onButtonClick() {
+  alert("Clear List?");
+}
+
+const button = document.querySelector("button");
+button.addEventListener("click", onButtonClick);
+
+buttons.forEach((button) => {
+  button.addEventListener("add", () => {
+    alert(`You clicked ${buttons}`);
+  });
+});
