@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
   const shoppingList = document.getElementById("shopping-list");
 
-  // no items when we start
+  // Initialize an empty array to store items
   let items = [];
 
+  // function to display the shopping list items
   function displayShoppingList() {
     shoppingList.innerHTML = "";
     items.forEach((task, index) => {
       const container = document.createElement("div");
-      const img = document.createElement("img");
-      img.src = task.image;
-      img.className = "cartimage";
 
       const title = document.createElement("h5");
       title.textContent = task.item;
 
+      //if item is marked as purchased apply strike
+
       if (task.purchased === true) {
         title.className = "strike";
       }
+
+      // creates button to mark the item as purchased
 
       const addButton = document.createElement("button");
       addButton.textContent = "MARK PURCHASED";
@@ -26,13 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
         displayShoppingList();
       });
 
-      container.appendChild(img);
       container.appendChild(title);
       container.appendChild(addButton);
 
       shoppingList.appendChild(container);
     });
   }
+
+  //functiom to clear shopping list
 
   function clearList() {
     items = [];
@@ -44,10 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     displayShoppingList();
   });
 
-  function saveItem(imageUrl, itemName) {
+  //function to save a new item to the list
+  function saveItem(itemName) {
     const itemToBeSaved = {
       item: itemName,
-      image: imageUrl,
       purchased: false,
     };
     items.unshift(itemToBeSaved);
@@ -60,13 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("addItemsForm")
     .addEventListener("submit", function (event) {
-      const imageUrl = document.getElementById("image").value;
       const itemName = document.getElementById("item").value;
 
       event.preventDefault();
 
       // save item in our array of objects
-      saveItem(imageUrl, itemName);
+      saveItem(itemName);
     });
 
   displayShoppingList();

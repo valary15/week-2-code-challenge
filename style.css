@@ -38,11 +38,7 @@ a {
   margin-bottom: 50px;
   justify-content: space-between;
 }
-.cartimage {
-  height: 300px;
-  width: 300px;
-  border-radius: 150px;
-}
+
 h5 {
   font-weight: 30px;
   font-weight: 100;
@@ -63,4 +59,9 @@ button {
 }
 body {
   background-color: black;
+}
+input {
+  color: green;
+  padding: 30px;
+  width: 300px;
 }
