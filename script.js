@@ -1,12 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const shoppingList = document.getElementById("shopping-list");
 
-  const items = [
-    { id: 1, item: "Bread", image: "bread.png", strike: false },
-    { id: 2, item: "Meat", image: "Meat.png", strike: false },
-    { id: 3, item: "Milk", image: "milk.png", strike: false },
-    { id: 4, item: "Fruit", image: "fruit.png", strike: false },
-  ];
+  // no items when we start
+  let items = [];
 
   function displayShoppingList() {
     shoppingList.innerHTML = "";
@@ -19,14 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const title = document.createElement("h5");
       title.textContent = task.item;
 
-      if (task.strike === true) {
+      if (task.purchased === true) {
         title.className = "strike";
       }
 
       const addButton = document.createElement("button");
-      addButton.textContent = "ADD";
+      addButton.textContent = "MARK PURCHASED";
       addButton.addEventListener("click", function () {
-        items[index].strike = true;
+        items[index].purchased = true;
         displayShoppingList();
       });
 
@@ -37,11 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
       shoppingList.appendChild(container);
     });
   }
+
   function clearList() {
-    items.forEach((task) => {
-      task.strike = false;
-    });
+    items = [];
   }
+
   const clearbutton = document.getElementById("clearlist");
   clearbutton.addEventListener("click", function () {
     clearList();
@@ -49,19 +45,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function saveItem(imageUrl, itemName) {
-    console.log('Saved items are: ', imageUrl, itemName)
+    const itemToBeSaved = {
+      item: itemName,
+      image: imageUrl,
+      purchased: false,
+    };
+    items.unshift(itemToBeSaved);
+
+    // re-render all items
+    displayShoppingList();
   }
 
   // submit add items form
-  document.getElementById('addItemsForm').addEventListener('submit', function(event) {
-    const imageUrl = document.getElementById('image').value;
-    const itemName = document.getElementById('item').value;
+  document
+    .getElementById("addItemsForm")
+    .addEventListener("submit", function (event) {
+      const imageUrl = document.getElementById("image").value;
+      const itemName = document.getElementById("item").value;
 
-    event.preventDefault();
+      event.preventDefault();
 
-    // save item in our array of objects
-    saveItem(imageUrl, itemName)
-  })
+      // save item in our array of objects
+      saveItem(imageUrl, itemName);
+    });
 
   displayShoppingList();
 });
