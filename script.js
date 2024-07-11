@@ -3,14 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const items = [
     { id: 1, item: "Bread", image: "bread.png", strike: false },
-    { id: 2, item: "Meat", image: "Meat.png", strike: false},
+    { id: 2, item: "Meat", image: "Meat.png", strike: false },
     { id: 3, item: "Milk", image: "milk.png", strike: false },
     { id: 4, item: "Fruit", image: "fruit.png", strike: false },
   ];
 
   function displayShoppingList() {
     shoppingList.innerHTML = "";
-    items.forEach((task) => {
+    items.forEach((task, index) => {
       const container = document.createElement("div");
       const img = document.createElement("img");
       img.src = task.image;
@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const addButton = document.createElement("button");
       addButton.textContent = "ADD";
+      addButton.addEventListener("click", function () {
+        items[index].strike = true;
+        displayShoppingList();
+      });
 
       container.appendChild(img);
       container.appendChild(title);
@@ -33,24 +37,31 @@ document.addEventListener("DOMContentLoaded", () => {
       shoppingList.appendChild(container);
     });
   }
+  function clearList() {
+    items.forEach((task) => {
+      task.strike = false;
+    });
+  }
+  const clearbutton = document.getElementById("clearlist");
+  clearbutton.addEventListener("click", function () {
+    clearList();
+    displayShoppingList();
+  });
+
+  function saveItem(imageUrl, itemName) {
+    console.log('Saved items are: ', imageUrl, itemName)
+  }
+
+  // submit add items form
+  document.getElementById('addItemsForm').addEventListener('submit', function(event) {
+    const imageUrl = document.getElementById('image').value;
+    const itemName = document.getElementById('item').value;
+
+    event.preventDefault();
+
+    // save item in our array of objects
+    saveItem(imageUrl, itemName)
+  })
 
   displayShoppingList();
-});
-function onButtonClick() {
-  alert("Clear List?");
-}
-
-const button = document.querySelector("button");
-button.addEventListener("click", onButtonClick);
-
-buttons.forEach((button) => {
-  button.addEventListener("add", () => {
-    alert(`You clicked ${buttons}`);
-  });
-});
-
-list.addEventListener("click", (e) => {
-  if (e.target.classList.contains("todo-item")) {
-    e.target.classList.toggle("strike");
-  }
 });
